@@ -58,7 +58,4 @@ st.title("Verkehrszählung nach Fahrzeugkategorie")
 st.write("Auswertung des gesamten Verkehrsflusses kategorisiert nach Fahrzeugtyp")
 st.caption("Fahrzeugkategorie: {} | Zählungsstandort: {}".format(veh_category, count_station))
 
-df = pd.read_csv("https://github.com/aeberhardhsr/open-data-hack-sg/blob/main/data-preparation/verkehrszahlung.csv")
-df_head = pd.
 
-st.write(df_head)
