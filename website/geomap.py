@@ -1,8 +1,11 @@
-# import gmplot package
+import configparser
 import gmplot
 
-# API KEY = AIzaSyAVsapOCYYsZ3pl8sCC0i04g6UuH7H3fUQ
-apikey = 'AIzaSyAVsapOCYYsZ3pl8sCC0i04g6UuH7H3fUQ'
+config = configparser.ConfigParser()
+config.read('google_api.conf')
+
+# API KEY from config file
+apikey = config['APIKey']['apikey']
 
 
 latitude_list = [47.4268991755, 47.4151264537, 47.4133813496, 47.4226367328, 47.4048725228 ]
@@ -19,5 +22,3 @@ gmap3.scatter( latitude_list, longitude_list, '#FF0000', size = 40, marker = Fal
 #gmap3.plot(latitude_list, longitude_list, 'cornflowerblue', edge_width = 2.5)
   
 gmap3.draw("map.html")
-
-#pipapo
