@@ -19,3 +19,5 @@ gmap3.scatter( latitude_list, longitude_list, '#FF0000', size = 40, marker = Fal
 #gmap3.plot(latitude_list, longitude_list, 'cornflowerblue', edge_width = 2.5)
   
 gmap3.draw("map.html")
+
+#pipapo
