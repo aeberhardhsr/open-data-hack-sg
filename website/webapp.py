@@ -49,7 +49,26 @@ count_station = st.sidebar.selectbox("Standort auswählen", options=[
 
 ### begin data preparation for first map ###
 
+dfg = pd.read_csv("verkehrszahlung_gesamt_2018_2020.csv", sep=";", error_bad_lines=False).fillna(0) 
+# drop non usable columns
+dfg = dfg.drop (dfg.columns[[0,4,5,6,8,9,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,32]], axis=1)
+#insert new columns JAHR und Längengrad
+dfg.insert(4, "JAHR", value=None)
+dfg.insert(2, "Longitude", value=None)
+#extract year from DATUM
+dfg['JAHR'] = dfg['DATUM'].str.slice(0,4)
+#drop column DATUM
+dfg = dfg.drop (dfg.columns[[3]], axis=1)
+# split the standort columnt to extract coordinates
+dfg[['Longitude','Laltitude']] = dfg['STANDORT'].str.split(',',1, expand=True)
+# drop column
+dfg = dfg.drop (dfg.columns[1], axis=1)
+#set columns in right order
+dfg = dfg[['BEZEICHNUNG', 'Longitude', 'Laltitude', 'RICHTUNG', 'JAHR', 'TAGESTOTAL']]
+
+result1 = dfg.loc[(dfg['JAHR'] == int(year)) & (dfg['BEZEICHNUNG'] == count_station_year)]['TAGESTOTAL'].sum()
 ### end data preparation for first map ###
+
 
 
 ### begin data preparation for second map ###
@@ -86,7 +105,7 @@ df['JAHR'] = pd.DatetimeIndex(df['DATUM']).year
 # drop non used columns
 df = df.drop(['STANDORT', 'DATUM'], 1)
 
-result = df.loc[(df['BEZEICHNUNG'] == count_station) & (df['JAHR'] == int(year_radio)) & (df['NAME_D'] == veh_category)]['TAGESTOTAL'].sum()
+result2 = df.loc[(df['BEZEICHNUNG'] == count_station) & (df['JAHR'] == int(year_radio)) & (df['NAME_D'] == veh_category)]['TAGESTOTAL'].sum()
 
 ### end of data preparation ###
 
@@ -103,7 +122,7 @@ st.map(data)
 
 col1, col2 = st.columns(2)
 col1.metric("Jahr", year)
-col2.metric("Fahrzeugzähler", "11Mio", "5%")
+col2.metric("Fahrzeugzähler", int(result1), "5%")
 st.metric("Standort", count_station_year)
 st.markdown("___")
 
@@ -119,7 +138,7 @@ data2 = pd.DataFrame({
 st.map(data2)
 
 col1, col2 = st.columns(2)
-col1.metric("Fahrzeugzähler", int(result), "5%")
+col1.metric("Fahrzeugzähler", int(result2), "5%")
 col2.metric("Jahr", year_radio)
 st.metric("Kategorie", veh_category)
 st.metric("Standort", count_station)
