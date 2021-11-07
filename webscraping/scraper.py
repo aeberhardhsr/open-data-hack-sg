@@ -7,4 +7,4 @@ src = result.content
 soup = BeautifulSoup(src, 'html.parser')
 
 tag = soup.find_all('span', class_='spRight')
-print(tag)
+#print(tag)
