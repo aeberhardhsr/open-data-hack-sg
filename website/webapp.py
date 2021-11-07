@@ -99,11 +99,11 @@ dfg['JAHR'] = dfg['DATUM'].str.slice(0,4)
 #drop column DATUM
 dfg = dfg.drop (dfg.columns[[3]], axis=1)
 # split the standort columnt to extract coordinates
-dfg[['Longitude','Laltitude']] = dfg['STANDORT'].str.split(',',1, expand=True)
+dfg[['Longitude','Latitude']] = dfg['STANDORT'].str.split(',',1, expand=True)
 # drop column
 dfg = dfg.drop (dfg.columns[1], axis=1)
 #set columns in right order
-dfg = dfg[['BEZEICHNUNG', 'Longitude', 'Laltitude', 'RICHTUNG', 'JAHR', 'TAGESTOTAL']]
+dfg = dfg[['BEZEICHNUNG', 'Longitude', 'Latitude', 'RICHTUNG', 'JAHR', 'TAGESTOTAL']]
 
 result1 = dfg.loc[(dfg['JAHR'] == year) & (dfg['BEZEICHNUNG'] == count_station_year)]['TAGESTOTAL'].sum()
 ### end data preparation for first map ###
@@ -154,9 +154,10 @@ st.write("Auswertung des gesamten Verkehrsflusses an den jeweiligen Aufzeichnung
 
 # first map
 data = pd.DataFrame({
-    'counter_locations' : ["Bildweiherstrasse"],
-    'lat' : [47.4268991755],
-    'lon' : [9.383057054]})
+    'counter_locations' : dfg[(dfg['BEZEICHNUNG'] == count_station_year)]
+    'lat' : dfg['Latitude']
+    'lon' : dfg['Longitude']
+})
 st.map(data)
 
 col1, col2 = st.columns(2)
