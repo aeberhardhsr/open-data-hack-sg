@@ -9,6 +9,7 @@ import io
 
 #df = pd.read_csv("verkehrszahlung.csv", sep=";", error_bad_lines=False).fillna(0)
 
+
 dfg = pd.read_csv("verkehrszahlung_gesamt_2018_2020.csv", sep=";", error_bad_lines=False).fillna(0) 
 
 dfg = dfg.drop (dfg.columns[[0,4,5,6,8,9,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,32]], axis=1)
@@ -22,10 +23,26 @@ dfg = dfg[['BEZEICHNUNG', 'Longitude', 'Laltitude', 'RICHTUNG', 'JAHR', 'TAGESTO
 
 #display[(dfg['JAHR'] == 2020) & (dfg['BEZEICHNUNG'] == 'St.Gallen Stadt Gaiserwaldstr.')]
 
-def Total(year, region):
-    s = dfg[(dfg['JAHR'] == year) & (dfg['BEZEICHNUNG'] == region)]
-    sum = s['TAGESTOTAL'].sum()
-    display (sum)
+#def Total(year, region):
+    #s = dfg[(dfg['JAHR'] == year) & (dfg['BEZEICHNUNG'] == region)]
+   # dfg = dfg.groupby(['JAHR'] == year) & (dfg['BEZEICHNUNG'] == region)['TAGESTOTAL'].sum()
+   # sum = s['TAGESTOTAL'].sum()
+    #display (sum)
+
+#dfg = dfg.groupby(['JAHR', 'BEZEICHNUNG'])['TAGESTOTAL'].sum()
+#dfg = dfg.groupby(['JAHR', 'BEZEICHNUNG'])['TAGESTOTAL'].sum()
+
+year = 2018
+region = "St.Gallen Stadt Gaiserwaldstr."
+
+
+#dfg = dfg.groupby(['JAHR'] == year & ['BEZEICHNUNG'] == region)['TAGESTOTAL'].sum()
+
+result = dfg.loc[(dfg['JAHR'] == year) & (dfg['BEZEICHNUNG'] == region)]['TAGESTOTAL'].sum()
+
+#result = df.loc[(df['BEZEICHNUNG'] == count_station) & (df['JAHR'] == int(year_radio)) & (df['NAME_D'] == veh_category)]['TAGESTOTAL'].sum()
+
+display(result.head())
 
 
 #Total(2018, "St.Gallen Stadt Gaiserwaldstr.")
