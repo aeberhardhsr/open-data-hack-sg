@@ -3,22 +3,61 @@ import numpy as np
 import pandas as pd
 
  
-
-
-
-
 ## Sidebar
 st.sidebar.markdown("## Einstellungen")
 st.sidebar.markdown("Jahr auswählen um die spezifische Verkehrsdichte anzuzeigen")
-year = st.sidebar.slider('Aufzeichnungs Jahr', min_value=2018, max_value=2020, step=1)
+year = st.sidebar.radio("Jahr auswählen", ("2018", "2019", "2020"))
 st.sidebar.markdown("Zählerstation auswählen")
 count_station_year = st.sidebar.selectbox("Standort auswählen", options=[
-    "Bildweiherstrasse",
-    "Fürstenlandstrasse 57",
-    "Lerchenfeld",
-    "Singenberg",
-    "St. Josefen-Strasse",
-    "Teufener Strasse 75"
+    "St.Gallen Stadt Biderstr.",     
+    "St.Gallen Stadt Bildweiherstr.",     
+    "St.Gallen Stadt Biserhofstr. 7",     
+    "St.Gallen Stadt Bruggen",     
+    "St.Gallen Stadt Burgstr. 59",     
+    "St.Gallen Stadt Dufour/Winkelr",      
+    "St.Gallen Stadt Dufourstr. 4",      
+    "St.Gallen Stadt Favrestr. 5",      
+    "St.Gallen Stadt Flurhofstr. 68",      
+    "St.Gallen Stadt Fürstenlstr. 57",     
+    "St.Gallen Stadt Gaiserwaldstr.",    
+    "St.Gallen Stadt Gallusst./Webergasse",    
+    "St.Gallen Stadt Geltenwilenstr",    
+    "St.Gallen Stadt Gerhaldenstr.21",    
+    "St.Gallen Stadt Grossackers. 1",    
+    "St.Gallen Stadt Guisanstr. 40",    
+    "St.Gallen Stadt Heiligkreuz",    
+    "St.Gallen Stadt Herisauer/Schranke",    
+    "St.Gallen Stadt Herisauerst.58",    
+    "St.Gallen Stadt Industriest.13",    
+    "St.Gallen Stadt Kirche Neudorf",    
+    "St.Gallen Stadt Kn.Neudorf neu",    
+    "St.Gallen Stadt Kolumb/Heiligk",    
+    "St.Gallen Stadt Kolumba/Heimat",    
+    "St.Gallen Stadt Lerchenfeld",    
+    "St.Gallen Stadt Lerchenfeldstr",    
+    "St.Gallen Stadt Lerchental",    
+    "St.Gallen Stadt Letzistr.",    
+    "St.Gallen Stadt Lukasstr. 30",    
+    "St.Gallen Stadt Moosbruggst. 2",    
+    "St.Gallen Stadt Mühlegg",    
+    "St.Gallen Stadt Müller-Fried.2",    
+    "St.Gallen Stadt Ob/Teufen. neu",    
+    "St.Gallen Stadt Oberstr. 75",    
+    "St.Gallen Stadt Oberstr/Ahorns",    
+    "St.Gallen Stadt Post Langgasse",    
+    "St.Gallen Stadt Rötelibrücke",    
+    "St.Gallen Stadt Schwarzer Bäre",    
+    "St.Gallen Stadt Singenberg",    
+    "St.Gallen Stadt Sonnenh./Peter",    
+    "St.Gallen Stadt Speicherstr 54",    
+    "St.Gallen Stadt Splügen/Bachst",    
+    "St.Gallen Stadt St.Fiden(neu)",    
+    "St.Gallen Stadt St.Jakob-Str.5",    
+    "St.Gallen Stadt St.Josefen-Str",    
+    "St.Gallen Stadt St.Leonhard Br",    
+    "St.Gallen Stadt Steinach/Sonne",    
+    "t.Gallen Stadt Turnerstr. 30",  
+    "t.Gallen Stadt Wildeggstr 44"  
 ], key=1)
 st.sidebar.markdown("___")
 
@@ -66,7 +105,7 @@ dfg = dfg.drop (dfg.columns[1], axis=1)
 #set columns in right order
 dfg = dfg[['BEZEICHNUNG', 'Longitude', 'Laltitude', 'RICHTUNG', 'JAHR', 'TAGESTOTAL']]
 
-result1 = dfg.loc[(dfg['JAHR'] == int(year)) & (dfg['BEZEICHNUNG'] == count_station_year)]['TAGESTOTAL'].sum()
+result1 = dfg.loc[(dfg['JAHR'] == year) & (dfg['BEZEICHNUNG'] == count_station_year)]['TAGESTOTAL'].sum()
 ### end data preparation for first map ###
 
 
