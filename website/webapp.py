@@ -154,10 +154,10 @@ st.write("Auswertung des gesamten Verkehrsflusses an den jeweiligen Aufzeichnung
 
 # first map
 data = pd.DataFrame({
-    'counter_locations' : dfg[(dfg['BEZEICHNUNG'] == count_station_year)]
-    'lat' : dfg['Latitude']
-    'lon' : dfg['Longitude']
-})
+    'counter_locations' : ["Bildweiherstrasse", "Fürstenlandstrasse 57", "Lerchenfeld", "Singenberg", "St. Josefen-Strasse"],
+    'lat' : [47.4268991755, 47.4151264537, 47.4133813496, 47.4226367328, 47.4048725228],
+    'lon' : [9.383057054, 9.34173656537, 9.34717463867, 9.34185926089, 9.30853184166]})
+
 st.map(data)
 
 col1, col2 = st.columns(2)
