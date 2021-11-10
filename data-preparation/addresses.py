@@ -2,22 +2,12 @@ import json
 import requests
 
 addresses = []
-coordinates_x = []
-coordinates_y = []
 
 with open('./new.json', 'r') as file:
     data = json.load(file)
 
 for thing in data:
     addresses.append(thing['mainAddress']['street'])
-
-#print(addresses)
-
-#with open('addresses.txt', 'w') as f:
- #   for item in addresses:
-  #      f.write("%s\n" % item)
-
-
 
 #save the x,y coordinates
 with open('coordinates.csv', 'w') as csvFile:
