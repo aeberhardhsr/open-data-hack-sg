@@ -152,16 +152,16 @@ result2 = df.loc[(df['BEZEICHNUNG'] == count_station) & (df['JAHR'] == int(year_
 st.title("Verkehrszählung St. Gallen")
 st.write("Auswertung des gesamten Verkehrsflusses an den jeweiligen Aufzeichnungsorten über drei Jahre hinweg")
 
-resultlat = df.iloc[(df['BEZEICHNUNG'] == count_station)]['Latitude'][0]
-resultlon = df.iloc[(df['BEZEICHNUNG'] == count_station)]['Longitude'][0]
+resultlat = dfg.loc[(dfg['BEZEICHNUNG'] == count_station_year)]['Latitude'].head(1)
+resultlon = dfg.loc[(dfg['BEZEICHNUNG'] == count_station_year)]['Longitude'].head(1)
 st.write(resultlat, resultlon)
 # first map
-"""
+
 data = pd.DataFrame({
-    'counter_locations' : [count_station],
-    'lat' : [resultlat],
-    'lon' : [resultlon]})
-"""
+    'counter_locations' : [count_station_year],
+    'lat' : [float(resultlat)],
+    'lon' : [float(resultlon)]})
+
 
 st.map(data)
 #resultlongitude = df.loc von result2 annähern
