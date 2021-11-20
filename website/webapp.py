@@ -152,13 +152,19 @@ result2 = df.loc[(df['BEZEICHNUNG'] == count_station) & (df['JAHR'] == int(year_
 st.title("Verkehrszählung St. Gallen")
 st.write("Auswertung des gesamten Verkehrsflusses an den jeweiligen Aufzeichnungsorten über drei Jahre hinweg")
 
+resultlat = df.iloc[(df['BEZEICHNUNG'] == count_station)]['Latitude'][0]
+resultlon = df.iloc[(df['BEZEICHNUNG'] == count_station)]['Longitude'][0]
+st.write(resultlat, resultlon)
 # first map
+"""
 data = pd.DataFrame({
-    'counter_locations' : ["Bildweiherstrasse"],
-    'lat' : [47.4268991755],
-    'lon' : [9.383057054]})
+    'counter_locations' : [count_station],
+    'lat' : [resultlat],
+    'lon' : [resultlon]})
+"""
 
 st.map(data)
+#resultlongitude = df.loc von result2 annähern
 
 col1, col2 = st.columns(2)
 col1.metric("Jahr", year)
