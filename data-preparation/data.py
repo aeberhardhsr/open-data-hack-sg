@@ -17,9 +17,9 @@ dfg.insert(4, "JAHR", value=None)
 dfg.insert(2, "Longitude", value=None)
 dfg['JAHR'] = dfg['DATUM'].str.slice(0,4)
 dfg = dfg.drop (dfg.columns[[3]], axis=1)
-dfg[['Longitude','Laltitude']] = dfg['STANDORT'].str.split(',',1, expand=True)
+dfg[['Longitude','Latitude']] = dfg['STANDORT'].str.split(',',1, expand=True)
 dfg = dfg.drop (dfg.columns[1], axis=1)
-dfg = dfg[['BEZEICHNUNG', 'Longitude', 'Laltitude', 'RICHTUNG', 'JAHR', 'TAGESTOTAL']]
+dfg = dfg[['BEZEICHNUNG', 'Longitude', 'Latitude', 'RICHTUNG', 'JAHR', 'TAGESTOTAL']]
 
 #display[(dfg['JAHR'] == 2020) & (dfg['BEZEICHNUNG'] == 'St.Gallen Stadt Gaiserwaldstr.')]
 
@@ -32,17 +32,17 @@ dfg = dfg[['BEZEICHNUNG', 'Longitude', 'Laltitude', 'RICHTUNG', 'JAHR', 'TAGESTO
 #dfg = dfg.groupby(['JAHR', 'BEZEICHNUNG'])['TAGESTOTAL'].sum()
 #dfg = dfg.groupby(['JAHR', 'BEZEICHNUNG'])['TAGESTOTAL'].sum()
 
-year = 2018
-region = "St.Gallen Stadt Gaiserwaldstr."
+#year = 2018
+#region = "St.Gallen Stadt Gaiserwaldstr."
 
 
 #dfg = dfg.groupby(['JAHR'] == year & ['BEZEICHNUNG'] == region)['TAGESTOTAL'].sum()
 
-result = dfg.loc[(dfg['JAHR'] == year) & (dfg['BEZEICHNUNG'] == region)]['TAGESTOTAL'].sum()
+##result = dfg.loc[(dfg['JAHR'] == year) & (dfg['BEZEICHNUNG'] == region)]['TAGESTOTAL'].sum()
 
 #result = df.loc[(df['BEZEICHNUNG'] == count_station) & (df['JAHR'] == int(year_radio)) & (df['NAME_D'] == veh_category)]['TAGESTOTAL'].sum()
 
-display(result.head())
+#display(result.head())
 
 
 #Total(2018, "St.Gallen Stadt Gaiserwaldstr.")
@@ -83,8 +83,13 @@ display(result.head())
 #Josefensat = df.loc[df['ORT-ID']==10944][df['NAME_D']=="Sattelzug"]
 #TotJosefensat = Josefensat['TAGESTOTAL'].sum()
 
+#data = pd.DataFrame({
+       # dfg.loc[(dfg['BEZEICHNUNG'] == "St.Gallen Stadt Gaiserwaldstr.")]['latitude', 'longitude'].index[0] #47.4268991755],
+#}
 
+dfg = dfg[(dfg['BEZEICHNUNG'] == "St.Gallen Stadt Gaiserwaldstr.")]
 
+print(dfg)
 #Anzahl pro Jahr 
 #AnzahlBCJosefen = Josefenbc['TAGESTOTAL'].sum()
 #Josefenlz = df.loc[df['ORT-ID']==10944], ['NAME_D']=="Lastenzug"
