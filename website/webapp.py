@@ -174,11 +174,15 @@ st.markdown("___")
 st.title("Verkehrszählung nach Fahrzeugkategorie")
 st.write("Auswertung des gesamten Verkehrsflusses kategorisiert nach Fahrzeugtyp")
 
+
+resultlat2 = df.loc[(df['BEZEICHNUNG'] == count_station)]['Latitude'].head(1)
+resultlon2 = df.loc[(df['BEZEICHNUNG'] == count_station)]['Longitude'].head(1)
+
 # second map
 data2 = pd.DataFrame({
-    'counter_locations' : ["Bildweiherstrasse", "Fürstenlandstrasse 57", "Lerchenfeld", "Singenberg", "St. Josefen-Strasse"],
-    'lat' : [47.4268991755, 47.4151264537, 47.4133813496, 47.4226367328, 47.4048725228],
-    'lon' : [9.383057054, 9.34173656537, 9.34717463867, 9.34185926089, 9.30853184166]})
+    'counter_locations' : [count_station],
+    'lat' : [float(resultlat2)],
+    'lon' : [float(resultlon2)]})
 
 st.map(data2)
 
