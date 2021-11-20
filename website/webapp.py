@@ -99,7 +99,7 @@ dfg['JAHR'] = dfg['DATUM'].str.slice(0,4)
 #drop column DATUM
 dfg = dfg.drop (dfg.columns[[3]], axis=1)
 # split the standort columnt to extract coordinates
-dfg[['Longitude','Latitude']] = dfg['STANDORT'].str.split(',',1, expand=True)
+dfg[['Latitude','Longitude']] = dfg['STANDORT'].str.split(',',1, expand=True)
 # drop column
 dfg = dfg.drop (dfg.columns[1], axis=1)
 #set columns in right order
